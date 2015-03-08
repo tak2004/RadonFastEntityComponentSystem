@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.11)
 project(RadonFastEntityComponentSystem)
 
-include("${RADONFRAMEWORK_DIR}/cmake/util/Macros.cmake")
+include("Integrate.cmake")
 
 AddSourceDirectoryRecursive(rfecssrclist "src" "Source")
 AddHeaderDirectoryRecursive(rfecshdrlist "include/RFECS" "Includes")
