@@ -23,7 +23,7 @@ RF_Type::UInt8* SharedAttributePool::AttachToEntity(SharedAttributeID AttributeI
     Entity* entity = m_EntityLookup[EntityIdentifier];
     if(!entity->m_AttributeLookup.ContainsKey(AttributeIdentifier))
     {
-        RF_Mem::AutoPointerArray<RF_Type::UInt8> newAttribute(new RF_Type::UInt8[AttributeDataSize], AttributeDataSize);
+        RF_Mem::AutoPointerArray<RF_Type::UInt8> newAttribute(AttributeDataSize);
         entity->m_AttributeLookup[AttributeIdentifier] = newAttribute.Get();
         entity->m_Attributes.AddLast(newAttribute);
 
