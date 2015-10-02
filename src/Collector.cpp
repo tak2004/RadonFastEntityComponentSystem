@@ -6,12 +6,6 @@ using namespace RadonFastEntityComponentSystem;
 
 void Collector::Process()
 {
-    /*RF_Algo::ForEach(m_ComponentManagers, 
-        [](RF_Collect::Array<RF_Mem::AutoPointer<BaseComponentManager> >::EnumeratorType& Enum)
-        {
-            (*Enum)->Process();
-        }
-    );*/
     for(RF_Type::Size i = 0; i < m_ComponentManagers.Count(); ++i)
     {
         m_ComponentManagers(i)->Process();
@@ -42,7 +36,7 @@ void Collector::RegisterComponentManager(RF_Mem::AutoPointer<BaseComponentManage
         m_ComponentManagerLookup[ComponentManager->ComponentTypes()(i)] = ComponentManager.Get();
     }    
 
-    ComponentManager->Setup(*m_Allocator);
+    ComponentManager->Setup(*m_Allocator, m_Attributes);
     m_ComponentManagers.Resize(m_ComponentManagers.Count()+1);
     m_ComponentManagers(m_ComponentManagers.Count()-1)=ComponentManager;
 }

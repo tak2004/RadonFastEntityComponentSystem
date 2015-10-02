@@ -14,11 +14,11 @@ class Allocator;
 class BaseComponentManager
 {
 public:
-    virtual void Setup(Allocator& MemoryAllocator)=0;
+    virtual void Setup(Allocator& MemoryAllocator, SharedAttributePool& AttributePool) = 0;
     
     virtual void Process()=0;
 
-    virtual void AttachComponentOnEntity(ComponentID Component,
+    virtual RF_Type::Bool AttachComponentOnEntity(ComponentID Component,
         RF_Mem::AutoPointerArray<RF_Type::UInt8>& ComponentData,
         EntityID Entity, SharedAttributePool& SharedAttributes) = 0;
 
@@ -26,7 +26,7 @@ public:
 protected:
     RF_Collect::Array<ComponentID> m_ComponentIdentifiers;
     Allocator* m_Allocator;
-    
+    SharedAttributePool* m_AttributePool;
 };
 
 }
