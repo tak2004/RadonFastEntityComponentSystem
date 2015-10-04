@@ -54,7 +54,7 @@ struct BaseComponent<CompontID::Physic>
     void Process()
     {
         // 100us
-        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 0, 100);
+        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 1);
         RF_SysThread::Thread::Sleep(consumptionTime);
     }
 private:
@@ -82,7 +82,8 @@ struct BaseComponent<CompontID::AI>
     void Process()
     {
         // 100us
-        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 0, 100);
+        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 1);
+        RF_SysThread::Thread::Sleep(consumptionTime);
     }
 private:
     Transform* m_Transform;// shared 
@@ -110,7 +111,8 @@ struct BaseComponent<CompontID::Render>
     void Process()
     {
         // 100us
-        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 0, 100);
+        RF_Time::TimeSpan consumptionTime = RF_Time::TimeSpan::CreateByTime(0, 0, 0, 0, 1);
+        RF_SysThread::Thread::Sleep(consumptionTime);
     }
 private:
     Transform* m_Transform;
@@ -245,19 +247,19 @@ public:
 
     RF_Type::Bool SingleThreaded()
     {
-        RF_Pattern::Singleton<RF_Thread::ThreadPool>::GetInstance().SetMaxThreads(1, 0);
+        RF_Pattern::Singleton<RF_Thread::ThreadPool>::GetInstance().DisableQueing();
         Allocator allocator;
         RFECS::Collector collector;
         collector.Setup(allocator);
         Setup(collector);
 
         collector.Process();
+        RF_Pattern::Singleton<RF_Thread::ThreadPool>::GetInstance().EnableQueing();
         return true;
     }
 
     RF_Type::Bool MultiThreaded()
     {
-        RF_Pattern::Singleton<RF_Thread::ThreadPool>::GetInstance().SetMaxThreads(8, 0);
         Allocator allocator;
         RFECS::Collector collector;
         collector.Setup(allocator);
