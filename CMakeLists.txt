@@ -1,5 +1,5 @@
 # Define a project if this file wasn't included.
-if(NOT CMAKE_PROJECT_NAME OR "${CMAKE_PROJECT_NAME}" MATCHES "^ArgonA$")
+if(NOT CMAKE_PROJECT_NAME OR "${CMAKE_PROJECT_NAME}" MATCHES "^RadonFastEntityComponentSystem$")
     cmake_minimum_required(VERSION 2.8.11)
     project(RadonFastEntityComponentSystem)
     set(RADONFRAMEWORK_USE_OPENGL OFF CACHE BOOL "" FORCE)
@@ -20,7 +20,7 @@ AddSourceDirectoryRecursive(rfecssrclist "src" "Source")
 AddHeaderDirectoryRecursive(rfecshdrlist "include/RFECS" "Includes")
 set(RFECS_FILES ${rfecssrclist} ${rfecshdrlist})
 Generate(MODULE RFECS RadonFastEntityComponentSystem "Framework")
-AddPublicInclude(RFECS ${RadonFastEntityComponentSystem_SOURCE_DIR}/include/)
+AddPublicInclude(RFECS ${CMAKE_CURRENT_SOURCE_DIR}/include/)
 AddDependency(RFECS RadonFramework)
 Finalize(RFECS)
 
