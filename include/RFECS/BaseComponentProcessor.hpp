@@ -1,5 +1,5 @@
-#ifndef RFECS_BASECOMPONENTMANAGER_HPP
-#define RFECS_BASECOMPONENTMANAGER_HPP
+#ifndef RFECS_BASECOMPONENTPROCESSOR_HPP
+#define RFECS_BASECOMPONENTPROCESSOR_HPP
 #if _MSC_VER > 1000
 #pragma once
 #endif
@@ -11,7 +11,7 @@ namespace RadonFastEntityComponentSystem {
 
 class Allocator;
 
-class BaseComponentManager
+class BaseComponentProcessor
 {
 public:
     virtual void Setup(Allocator& MemoryAllocator, SharedAttributePool& AttributePool) = 0;
@@ -36,4 +36,4 @@ protected:
 namespace RFECS = RadonFastEntityComponentSystem;
 #endif
 
-#endif // RFECS_BASECOMPONENTMANAGER_HPP
+#endif // RFECS_BASECOMPONENTPROCESSOR_HPP

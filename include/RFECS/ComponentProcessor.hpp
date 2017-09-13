@@ -1,10 +1,10 @@
-#ifndef RFECS_COMPONENTMANAGER_HPP
-#define RFECS_COMPONENTMANAGER_HPP
+#ifndef RFECS_COMPONENTPROCESSOR_HPP
+#define RFECS_COMPONENTPROCESSOR_HPP
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-#include <RFECS/BaseComponentManager.hpp>
+#include <RFECS/BaseComponentProcessor.hpp>
 
 namespace RadonFastEntityComponentSystem {
 
@@ -12,10 +12,10 @@ class Allocator;
 
 // Generic component manager used for simple components.
 template<ComponentID ID>
-class ComponentManager: public BaseComponentManager
+class ComponentProcessor: public BaseComponentProcessor
 {
 public:
-    ComponentManager();
+    ComponentProcessor();
 
     virtual void Setup(Allocator& MemoryAllocator, SharedAttributePool& AttributePool);
 
@@ -29,7 +29,7 @@ protected:
 };
 
 template<ComponentID ID>
-RF_Type::Bool ComponentManager<ID>::AttachComponentOnEntity(ComponentID Component, 
+RF_Type::Bool ComponentProcessor<ID>::AttachComponentOnEntity(ComponentID Component, 
     RF_Mem::AutoPointerArray<RF_Type::UInt8>& ComponentData, EntityID Entity, 
     SharedAttributePool& SharedAttributes)
 {
@@ -44,14 +44,14 @@ RF_Type::Bool ComponentManager<ID>::AttachComponentOnEntity(ComponentID Componen
 }
 
 template<ComponentID ID>
-void ComponentManager<ID>::Process()
+void ComponentProcessor<ID>::Process()
 {
     RF_Algo::ForEach(m_Components, [](RF_Collect::Array<BaseComponent<ID> >::EnumeratorType& Enum) {
         Enum->Process(); });
 }
 
 template<ComponentID ID>
-void ComponentManager<ID>::Setup(Allocator& MemoryAllocator, 
+void ComponentProcessor<ID>::Setup(Allocator& MemoryAllocator, 
     SharedAttributePool& AttributePool)
 {
     m_Allocator = &MemoryAllocator;
@@ -59,8 +59,8 @@ void ComponentManager<ID>::Setup(Allocator& MemoryAllocator,
 }
 
 template<ComponentID ID>
-ComponentManager<ID>::ComponentManager()
-:BaseComponentManager()
+ComponentProcessor<ID>::ComponentProcessor()
+:BaseComponentProcessor()
 {
     m_ComponentIdentifiers.Resize(1);
     m_ComponentIdentifiers(0) = static_cast<RF_Type::UInt32>(ID);
@@ -73,4 +73,4 @@ ComponentManager<ID>::ComponentManager()
 namespace RFECS = RadonFastEntityComponentSystem;
 #endif
 
-#endif // RFECS_COMPONENTMANAGER_HPP
+#endif // RFECS_COMPONENTPROCESSOR_HPP

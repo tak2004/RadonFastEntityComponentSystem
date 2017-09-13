@@ -18,7 +18,7 @@ void Collector::Setup(Allocator& MemoryAllocator)
     m_Attributes.Setup(MemoryAllocator);
 }
 
-void Collector::RegisterComponentManager(RF_Mem::AutoPointer<BaseComponentManager>& ComponentManager)
+void Collector::RegisterComponentManager(RF_Mem::AutoPointer<BaseComponentProcessor>& ComponentManager)
 {
     // check if one of the components is already known
     for(RF_Type::Size i = 0; i < ComponentManager->ComponentTypes().Count(); ++i)

@@ -4,7 +4,7 @@
 #pragma once
 #endif
 
-#include <RFECS/BaseComponentManager.hpp>
+#include <RFECS/BaseComponentProcessor.hpp>
 #include <RFECS/SharedAttributePool.hpp>
 
 #include <RadonFramework/Radon.hpp>
@@ -22,7 +22,7 @@ public:
 
     void Process();
 
-    void RegisterComponentManager(RF_Mem::AutoPointer<BaseComponentManager>& ComponentManager);
+    void RegisterComponentManager(RF_Mem::AutoPointer<BaseComponentProcessor>& ComponentManager);
 
     void SetSharedAttributeOfEntity(SharedAttributeID AttributeIdentifier, 
         RF_Mem::AutoPointerArray<RF_Type::UInt8>& AttributeData, 
@@ -32,9 +32,9 @@ public:
         RF_Mem::AutoPointerArray<RF_Type::UInt8>& ComponentData, 
         EntityID EntityIdentifier);
 private:
-    RF_Collect::Array<RF_Mem::AutoPointer<BaseComponentManager> > m_ComponentManagers;
+    RF_Collect::Array<RF_Mem::AutoPointer<BaseComponentProcessor> > m_ComponentManagers;
     SharedAttributePool m_Attributes;
-    RF_Collect::HashMap<ComponentID, BaseComponentManager*> m_ComponentManagerLookup;
+    RF_Collect::HashMap<ComponentID, BaseComponentProcessor*> m_ComponentManagerLookup;
     Allocator* m_Allocator;
 };
 
