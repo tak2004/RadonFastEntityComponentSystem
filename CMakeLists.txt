@@ -13,8 +13,7 @@ endif()
 
 include("Integrate.cmake")
 
-rcf_addlocation(RADONFRAMEWORK "git" "https://github.com/tak2004/RadonFramework.git")
-Integrate(RADONFRAMEWORK "Radon framework" "RADONFRAMEWORK_HOME")
+rcf_addpackage(radonframework "dev")
 
 AddSourceDirectoryRecursive(rfecssrclist "src" "Source")
 AddHeaderDirectoryRecursive(rfecshdrlist "include/RFECS" "Includes")
